@@ -631,7 +631,7 @@ body {
 /* Logo oficial Salón Mirasoles */
 .mirasoles-asset-img {
   width: 100%;
-  max-width: min(230px, 70vw);
+  max-width: min(260px, 80vw);
   height: auto;
   display: block;
   margin: 6px auto 12px;
