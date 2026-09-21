@@ -406,10 +406,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleCopySuccess() {
     showToast('Alias copiado al portapapeles');
     if (copyBtnLabel) {
-      const originalText = copyBtnLabel.textContent;
-      copyBtnLabel.textContent = '¡COPIADO! ✓';
+      const originalHtml = copyBtnLabel.innerHTML;
+      copyBtnLabel.innerHTML = '<span>¡COPIADO! ✓</span>';
       setTimeout(() => {
-        copyBtnLabel.textContent = originalText;
+        copyBtnLabel.innerHTML = originalHtml;
       }, 2500);
     }
   }
