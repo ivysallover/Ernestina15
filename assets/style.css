@@ -182,7 +182,9 @@ body {
    SECCIÓN 1: PORTADA
    =================================================================== */
 .section-hero {
-  background-image: url('fondo1.png');
+  background-image: 
+    linear-gradient(to bottom, rgba(5, 4, 16, 0.35) 0%, rgba(10, 8, 34, 0.65) 75%, rgba(5, 4, 16, 0.95) 100%),
+    url('bg-vortex.jpg');
 }
 
 .celestial-ornament {
@@ -215,29 +217,19 @@ body {
   align-items: center;
 }
 
-/* Imagen tipográfica de la frase poética de entrada */
-.quote-asset-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 24px;
-  padding: 0 10px;
+/* Frase poética de apertura: texto nítido de alta gama */
+.poetic-phrase {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-soft);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+  max-width: 90%;
+  margin: 0 auto 20px;
+  letter-spacing: 0.5px;
   overflow: visible;
-}
-
-.quote-asset-img {
-  width: 100%;
-  max-width: min(320px, 85vw);
-  height: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 14px rgba(245, 215, 127, 0.25)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
-  transition: transform 0.3s ease;
-}
-
-.quote-asset-img:hover {
-  transform: scale(1.02);
 }
 
 .signature-block {
@@ -497,7 +489,9 @@ body {
    SECCIÓN 2: LA FIESTA & CUENTA REGRESIVA
    =================================================================== */
 .section-celebration {
-  background-image: url('fondo2.png');
+  background-image: 
+    linear-gradient(to bottom, rgba(5, 4, 16, 0.7) 0%, rgba(10, 8, 34, 0.8) 50%, rgba(5, 4, 16, 0.95) 100%),
+    url('bg-stars.jpg');
 }
 
 .celebration-emblem {
@@ -821,7 +815,9 @@ body {
    SECCIÓN 3: DRESS CODE & CONFIRMACIÓN
    =================================================================== */
 .section-dress {
-  background-image: url('fondo3.png');
+  background-image: 
+    linear-gradient(to bottom, rgba(5, 4, 16, 0.8) 0%, rgba(10, 8, 34, 0.85) 50%, rgba(5, 4, 16, 0.95) 100%),
+    url('bg-vortex.jpg');
 }
 
 .dresscode-outfit-container {
@@ -992,7 +988,9 @@ body {
    SECCIÓN 4: REGALOS & ALIAS
    =================================================================== */
 .section-gifts {
-  background-image: url('fondo4.png');
+  background-image: 
+    linear-gradient(to bottom, rgba(5, 4, 16, 0.75) 0%, rgba(10, 8, 34, 0.85) 50%, rgba(5, 4, 16, 0.95) 100%),
+    url('bg-stars.jpg');
 }
 
 .gift-emblem {
@@ -1134,7 +1132,9 @@ body {
    SECCIÓN 5: CIERRE
    =================================================================== */
 .section-farewell {
-  background-image: url('fondo5.png');
+  background-image: 
+    linear-gradient(to bottom, rgba(5, 4, 16, 0.75) 0%, rgba(10, 8, 34, 0.7) 50%, rgba(5, 4, 16, 0.95) 100%),
+    url('bg-vortex.jpg');
 }
 
 .farewell-constellation {
