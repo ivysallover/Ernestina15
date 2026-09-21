@@ -1,23 +1,28 @@
 /**
  * Mis XV Años — Ernestina
- * Interactividad: Reproductor de audio, Cuenta Regresiva, Canvas de estrellas, Copiar Alias y Calendario.
+ * Motor Cósmico de Estrellas, Estrellas Fugaces y Destellos Celestiales.
+ * Reproductor de audio (Coldplay - Viva La Vida), Cuenta Regresiva y Copia de Alias.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ===================================================================
-     1. CANVAS DE ESTRELLAS Y POLVO DORADO ANIMADO
+     1. MOTOR CÓSMICO AVANZADO: ESTRELLAS, FUGACES Y DESTELLOS
      =================================================================== */
-  const canvas = document.getElementById('starsCanvas');
+  const canvas = document.getElementById('cosmosCanvas');
   const ctx = canvas ? canvas.getContext('2d') : null;
-  let particles = [];
-  let animationFrameId = null;
 
-  function initCanvas() {
+  let stars = [];
+  let shootingStars = [];
+  let sparkles = [];
+  let lastShootingStarTime = 0;
+  let scrollY = 0;
+
+  function initCosmos() {
     if (!canvas || !ctx) return;
     resizeCanvas();
-    createParticles();
-    animateParticles();
+    generateStarfield();
+    animateCosmos(0);
   }
 
   function resizeCanvas() {
@@ -28,60 +33,196 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', () => {
     if (!canvas) return;
     resizeCanvas();
+    generateStarfield();
   });
 
-  function createParticles() {
-    particles = [];
-    const count = Math.min(Math.floor(window.innerWidth * 0.1), 70);
+  window.addEventListener('scroll', () => {
+    scrollY = window.scrollY || window.pageYOffset;
+  }, { passive: true });
+
+  // Generador de estrellas con profundidad (3 capas)
+  function generateStarfield() {
+    stars = [];
+    const baseCount = Math.floor((canvas.width * canvas.height) / 8000);
+    const count = Math.min(Math.max(baseCount, 90), 160);
+
     for (let i = 0; i < count; i++) {
-      particles.push({
+      const depth = Math.random(); // 0 (lejano) a 1 (cercano)
+      stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 1.8 + 0.5,
-        color: Math.random() > 0.4 ? 'rgba(255, 216, 117, ' : 'rgba(255, 255, 255, ',
-        baseAlpha: Math.random() * 0.7 + 0.2,
-        speedY: (Math.random() * 0.35 + 0.1) * (Math.random() > 0.5 ? 1 : -1),
-        speedX: (Math.random() * 0.3 - 0.15),
-        twinkleSpeed: Math.random() * 0.03 + 0.01,
-        angle: Math.random() * Math.PI * 2
+        radius: depth > 0.85 ? Math.random() * 1.5 + 0.8 : Math.random() * 0.9 + 0.3,
+        color: depth > 0.6 
+          ? (Math.random() > 0.5 ? 'rgba(245, 215, 127, ' : 'rgba(255, 242, 200, ')
+          : 'rgba(230, 235, 255, ',
+        baseAlpha: Math.random() * 0.6 + 0.2,
+        twinkleSpeed: Math.random() * 0.04 + 0.01,
+        angle: Math.random() * Math.PI * 2,
+        depth: depth,
+        speedX: (Math.random() - 0.5) * 0.15 * (depth + 0.2),
+        speedY: (Math.random() * 0.2 + 0.05) * (depth + 0.2)
       });
     }
   }
 
-  function animateParticles() {
+  // Creación de una estrella fugaz
+  function spawnShootingStar() {
+    const angle = (Math.PI / 4) + (Math.random() * 0.3 - 0.15); // ~45 grados
+    const speed = Math.random() * 8 + 12;
+    shootingStars.push({
+      x: Math.random() * (canvas.width * 0.8),
+      y: Math.random() * (canvas.height * 0.3),
+      length: Math.random() * 80 + 90,
+      speedX: Math.cos(angle) * speed,
+      speedY: Math.sin(angle) * speed,
+      opacity: 1,
+      decay: Math.random() * 0.015 + 0.015,
+      trailWidth: Math.random() * 1.8 + 1.2
+    });
+  }
+
+  // Creación de un destello estelar (4 puntas que titilan brillantemente)
+  function spawnSparkle() {
+    sparkles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 12 + 8,
+      rotation: Math.random() * Math.PI,
+      opacity: 0,
+      maxOpacity: Math.random() * 0.6 + 0.4,
+      step: 0,
+      speed: Math.random() * 0.03 + 0.02
+    });
+  }
+
+  function animateCosmos(timestamp) {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(p => {
-      p.y += p.speedY;
-      p.x += p.speedX;
-      p.angle += p.twinkleSpeed;
+    // 1. Estrellas de fondo con suave titileo orgánico y deriva
+    stars.forEach(s => {
+      s.angle += s.twinkleSpeed;
+      s.x += s.speedX;
+      s.y += s.speedY;
 
-      const alpha = p.baseAlpha + Math.sin(p.angle) * 0.3;
-      const clampedAlpha = Math.max(0.1, Math.min(1, alpha));
+      // Wrap around screen
+      if (s.x < 0) s.x = canvas.width;
+      if (s.x > canvas.width) s.x = 0;
+      if (s.y < 0) s.y = canvas.height;
+      if (s.y > canvas.height) s.y = 0;
 
-      // Reaparecer al cruzar los límites
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
+      // Parallax sutil con el scroll
+      const currentY = (s.y - (scrollY * s.depth * 0.15)) % canvas.height;
+      const displayY = currentY < 0 ? currentY + canvas.height : currentY;
+
+      const alpha = Math.max(0.1, Math.min(1, s.baseAlpha + Math.sin(s.angle) * 0.35));
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + clampedAlpha + ')';
-      ctx.shadowBlur = p.radius * 3;
-      ctx.shadowColor = 'rgba(255, 216, 117, 0.8)';
+      ctx.arc(s.x, displayY, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = s.color + alpha + ')';
+      if (s.radius > 1.2) {
+        ctx.shadowBlur = s.radius * 4;
+        ctx.shadowColor = 'rgba(245, 215, 127, 0.7)';
+      } else {
+        ctx.shadowBlur = 0;
+      }
       ctx.fill();
     });
 
-    animationFrameId = requestAnimationFrame(animateParticles);
+    // 2. Estrellas fugaces periódicas (cada 4 a 7 segundos)
+    if (timestamp - lastShootingStarTime > 4500 && Math.random() > 0.6) {
+      spawnShootingStar();
+      lastShootingStarTime = timestamp;
+    }
+
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const ss = shootingStars[i];
+      ss.x += ss.speedX;
+      ss.y += ss.speedY;
+      ss.opacity -= ss.decay;
+
+      if (ss.opacity <= 0 || ss.x > canvas.width || ss.y > canvas.height) {
+        shootingStars.splice(i, 1);
+        continue;
+      }
+
+      // Dibujar estela gradiente
+      const tailX = ss.x - (ss.speedX * (ss.length / 15));
+      const tailY = ss.y - (ss.speedY * (ss.length / 15));
+
+      const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+      grad.addColorStop(0, 'rgba(245, 215, 127, 0)');
+      grad.addColorStop(0.6, `rgba(255, 245, 210, ${ss.opacity * 0.5})`);
+      grad.addColorStop(1, `rgba(255, 255, 255, ${ss.opacity})`);
+
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(ss.x, ss.y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = ss.trailWidth;
+      ctx.lineCap = 'round';
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'rgba(255, 245, 200, 0.8)';
+      ctx.stroke();
+
+      // Cabeza brillante
+      ctx.beginPath();
+      ctx.arc(ss.x, ss.y, ss.trailWidth * 1.2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${ss.opacity})`;
+      ctx.shadowBlur = 14;
+      ctx.shadowColor = '#ffffff';
+      ctx.fill();
+    }
+
+    // 3. Destellos celestiales (4-point sparkle flare)
+    if (sparkles.length < 3 && Math.random() < 0.02) {
+      spawnSparkle();
+    }
+
+    for (let i = sparkles.length - 1; i >= 0; i--) {
+      const sp = sparkles[i];
+      sp.step += sp.speed;
+      sp.opacity = Math.sin(sp.step * Math.PI) * sp.maxOpacity;
+
+      if (sp.step >= 1) {
+        sparkles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.translate(sp.x, sp.y);
+      ctx.rotate(sp.rotation);
+
+      const rad = sp.size;
+      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rad);
+      grad.addColorStop(0, `rgba(255, 255, 255, ${sp.opacity})`);
+      grad.addColorStop(0.3, `rgba(245, 215, 127, ${sp.opacity * 0.8})`);
+      grad.addColorStop(1, 'rgba(245, 215, 127, 0)');
+
+      // Cruz en punta de 4 rayos
+      ctx.fillStyle = grad;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = 'rgba(245, 215, 127, 0.8)';
+
+      ctx.beginPath();
+      ctx.ellipse(0, 0, rad, rad * 0.15, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.ellipse(0, 0, rad * 0.15, rad, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    requestAnimationFrame(animateCosmos);
   }
 
-  initCanvas();
+  initCosmos();
 
   /* ===================================================================
-     2. REPRODUCTOR DE MÚSICA & AUDIO
-     =================================================================== */
+     2. REPRODUCTOR DE MÚSICA (Coldplay - Viva La Vida)
+     ================================================================== */
   const audio = document.getElementById('bgAudio');
   const playBtn = document.getElementById('playBtn');
   const playIcon = document.getElementById('playIcon');
@@ -94,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalDurationEl = document.getElementById('totalDuration');
   const floatingMusicBtn = document.getElementById('floatingMusicBtn');
   const floatingWave = document.getElementById('floatingWave');
+  const cardWaveBars = document.getElementById('cardWaveBars');
 
   let isPlaying = false;
 
@@ -110,10 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.play().then(() => {
         setPlayingState(true);
       }).catch(err => {
-        console.warn('Autoplay restringido por el navegador:', err);
-        // Si hay algún problema, intentamos sintetizar un suave arpegio con Web Audio
-        playFallbackSynth();
-        setPlayingState(true);
+        console.warn('Interacción requerida por el navegador:', err);
       });
     } else {
       audio.pause();
@@ -124,19 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function setPlayingState(playing) {
     isPlaying = playing;
     if (playing) {
-      playIcon.classList.add('hidden');
-      pauseIcon.classList.remove('hidden');
+      if (playIcon) playIcon.classList.add('hidden');
+      if (pauseIcon) pauseIcon.classList.remove('hidden');
       if (floatingWave) floatingWave.classList.add('active');
-      if (dalePlayAction) {
-        dalePlayAction.querySelector('span').textContent = 'PAUSAR';
-      }
+      if (cardWaveBars) cardWaveBars.classList.add('active');
+      if (dalePlayAction) dalePlayAction.textContent = 'PAUSAR';
     } else {
-      playIcon.classList.remove('hidden');
-      pauseIcon.classList.add('hidden');
+      if (playIcon) playIcon.classList.remove('hidden');
+      if (pauseIcon) pauseIcon.classList.add('hidden');
       if (floatingWave) floatingWave.classList.remove('active');
-      if (dalePlayAction) {
-        dalePlayAction.querySelector('span').textContent = 'DALE PLAY';
-      }
+      if (cardWaveBars) cardWaveBars.classList.remove('active');
+      if (dalePlayAction) dalePlayAction.textContent = 'DALE PLAY';
     }
   }
 
@@ -160,13 +297,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     audio.addEventListener('ended', () => {
-      // Loop continuo
       audio.currentTime = 0;
       audio.play();
     });
   }
 
-  // Permitir saltar en la barra de progreso
   if (progressBarContainer && audio) {
     progressBarContainer.addEventListener('click', (e) => {
       const rect = progressBarContainer.getBoundingClientRect();
@@ -178,24 +313,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* Fallback sintético Web Audio API por si el archivo no cargara */
-  let synthContext = null;
-  function playFallbackSynth() {
-    try {
-      if (!synthContext) {
-        synthContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (synthContext.state === 'suspended') {
-        synthContext.resume();
-      }
-    } catch (e) {
-      console.log('Web Audio no disponible');
-    }
-  }
-
   /* ===================================================================
-     3. CUENTA REGRESIVA EN VIVO (COUNTDOWN)
-     Fecha del Evento: Sábado 17 de Octubre de 2026 a las 21:30 hs (GMT-3)
+     3. CUENTA REGRESIVA EDITORIAL
+     Fecha: Sábado 17 de Octubre de 2026 a las 21:30 hs (GMT-3)
      =================================================================== */
   const eventDate = new Date('2026-10-17T21:30:00-03:00').getTime();
 
@@ -213,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (hoursEl) hoursEl.textContent = '00';
       if (minutesEl) minutesEl.textContent = '00';
       if (secondsEl) secondsEl.textContent = '00';
-      const heading = document.querySelector('.countdown-heading');
+      const heading = document.querySelector('.countdown-title');
       if (heading) heading.textContent = '¡HOY ES LA FIESTA! 🎉';
       return;
     }
@@ -247,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toast.classList.add('show');
     setTimeout(() => {
       toast.classList.remove('show');
-    }, 3200);
+    }, 3000);
   }
 
   if (btnCopyAlias && aliasCodeText) {
@@ -278,13 +398,13 @@ document.addEventListener('DOMContentLoaded', () => {
       document.execCommand('copy');
       handleCopySuccess();
     } catch (err) {
-      showToast('Por favor selecciona y copia el alias manualmente');
+      showToast('Seleccioná el alias para copiarlo');
     }
     document.body.removeChild(textArea);
   }
 
   function handleCopySuccess() {
-    showToast('¡Alias copiado al portapapeles! 🎉');
+    showToast('Alias copiado al portapapeles');
     if (copyBtnLabel) {
       const originalText = copyBtnLabel.textContent;
       copyBtnLabel.textContent = '¡COPIADO! ✓';
@@ -301,18 +421,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnAddToCalendar) {
     btnAddToCalendar.addEventListener('click', () => {
-      // Opciones: Google Calendar o archivo iCal (.ics)
-      const title = encodeURIComponent('Mis XV Años — Ernestina ✨');
+      const title = encodeURIComponent('Mis XV Años — Ernestina');
       const details = encodeURIComponent('¡Te espero para festejar mis 15 años! Salón Mirasoles. Vestimenta: Elegante Sport (Color reservado: Azul).');
       const location = encodeURIComponent('Salón Mirasoles, Av. Paraguay 553, Resistencia, Chaco');
-      // 17 de Octubre 2026 de 21:30 a 05:30 (18 de Octubre)
-      // En UTC (Argentina GMT-3): 21:30 AR = 00:30 UTC del día siguiente
       const startUtc = '20261018T003000Z';
       const endUtc = '20261018T083000Z';
 
       const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startUtc}/${endUtc}&details=${details}&location=${location}`;
 
-      // Si es dispositivo móvil Apple o prefiere descarga:
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
       if (isIOS) {
         downloadIcsFile();
@@ -328,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'VERSION:2.0',
       'PRODID:-//Ernestina XV//Invitacion Digital//ES',
       'BEGIN:VEVENT',
-      'SUMMARY:Mis XV Años — Ernestina ✨',
+      'SUMMARY:Mis XV Años — Ernestina',
       'DESCRIPTION:¡Te espero para festejar mis 15 años! Salón Mirasoles. Vestimenta: Elegante Sport (Color reservado: Azul).',
       'LOCATION:Salón Mirasoles, Av. Paraguay 553, Resistencia, Chaco',
       'DTSTART:20261018T003000Z',

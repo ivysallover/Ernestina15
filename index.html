@@ -6,369 +6,366 @@
   <title>Mis XV Años — Ernestina</title>
   
   <!-- Meta tags para compartir en WhatsApp / Redes -->
-  <meta name="title" content="Mis XV Años — Ernestina ✨">
-  <meta name="description" content="¡Te invito a celebrar mis 15 años! Sábado 17 de Octubre - 21:30 hs. Salón Mirasoles.">
+  <meta name="title" content="Mis XV Años — Ernestina">
+  <meta name="description" content="Te invito a celebrar mis 15 años. Sábado 17 de Octubre, 21:30 hs · Salón Mirasoles.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mis XV Años — Ernestina ✨">
-  <meta property="og:description" content="¡Te invito a celebrar mis 15 años! Sábado 17 de Octubre - 21:30 hs. Salón Mirasoles.">
+  <meta property="og:title" content="Mis XV Años — Ernestina">
+  <meta property="og:description" content="Te invito a celebrar mis 15 años. Sábado 17 de Octubre, 21:30 hs · Salón Mirasoles.">
   <meta property="og:image" content="assets/bg-vortex.jpg">
-  <meta name="theme-color" content="#09081e">
+  <meta name="theme-color" content="#060515">
 
-  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
 
-  <!-- Google Fonts: Caligrafía elegante y tipografías clásicas -->
+  <!-- Tipografías de alta gama editorial y caligrafía -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-  <!-- Canvas animado de polvo dorado y estrellas cósmicas -->
-  <canvas id="starsCanvas"></canvas>
+  <!-- Canvas cósmico: Estrellas multicapa, estrellas fugaces y destellos dorados -->
+  <canvas id="cosmosCanvas"></canvas>
 
-  <!-- Audio de fondo -->
+  <!-- Audio de fondo (Coldplay - Viva La Vida) -->
   <audio id="bgAudio" src="assets/musica.mp3" preload="auto" loop></audio>
 
-  <!-- Botón flotante para pausar/reanudar música -->
-  <div class="floating-music-btn" id="floatingMusicBtn" title="Música">
-    <div class="sound-wave" id="floatingWave">
-      <span></span><span></span><span></span><span></span>
+  <!-- Botón flotante minimalista de control de audio -->
+  <aside class="floating-audio-control" id="floatingMusicBtn" aria-label="Control de música" title="Música">
+    <div class="audio-waves" id="floatingWave">
+      <span></span><span></span><span></span><span></span><span></span>
     </div>
-    <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 18V5l12-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="16" r="3" />
+    <svg class="audio-disc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 2a10 10 0 0 1 10 10" stroke-dasharray="3,3" />
     </svg>
-  </div>
+  </aside>
 
-  <!-- Contenedor principal de la tarjeta -->
-  <main class="invitation-container" id="top">
+  <!-- Contenedor principal de la experiencia -->
+  <main class="page-container" id="top">
 
-    <!-- ==================== SECCIÓN 1: INICIO ==================== -->
-    <section class="card-section section-hero" id="seccion-inicio">
-      <div class="stars-glitter-top"></div>
-      
-      <div class="hero-content">
-        <p class="poetic-intro">
-          Los momentos<br>
-          se vuelven inolvidables<br>
-          al compartirlos con<br>
-          la gente que queremos...
+    <!-- ==========================================
+         SECCIÓN 1: PORTADA & ENTRADA
+         ========================================== -->
+    <section class="screen-section section-hero" id="seccion-inicio">
+      <!-- Ornamento celestial superior -->
+      <div class="celestial-ornament">
+        <span class="ornament-line"></span>
+        <svg class="celestial-star" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.2 9.8L24 12L14.2 14.2L12 24L9.8 14.2L0 12L9.8 9.8Z"/>
+        </svg>
+        <span class="ornament-line"></span>
+      </div>
+
+      <div class="hero-body">
+        <p class="poetic-phrase">
+          Los momentos se vuelven inolvidables<br>
+          al compartirlos con la gente que queremos...
         </p>
 
-        <div class="name-wrapper">
-          <h1 class="girl-name">Ernestina</h1>
-          <h2 class="sub-event">MIS XV AÑOS</h2>
-        </div>
-
-        <!-- Reproductor de música estilo Canva / Spotify -->
-        <div class="audio-player-box" id="audioPlayerWidget">
-          <!-- Barra de progreso -->
-          <div class="progress-bar-container" id="progressBarContainer">
-            <div class="progress-bar" id="progressBar"></div>
-            <div class="progress-thumb" id="progressThumb"></div>
-          </div>
-          <div class="time-display">
-            <span id="currentTime">0:00</span>
-            <span id="totalDuration">0:24</span>
-          </div>
-
-          <!-- Controles de música -->
-          <div class="player-controls">
-            <!-- Shuffle -->
-            <button class="control-btn" type="button" aria-label="Aleatorio">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
-              </svg>
-            </button>
-            
-            <!-- Previous -->
-            <button class="control-btn" type="button" aria-label="Anterior">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="19 20 9 12 19 4 19 20"></polygon>
-                <line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line>
-              </svg>
-            </button>
-
-            <!-- Play / Pause Principal -->
-            <button class="main-play-btn" id="playBtn" type="button" aria-label="Reproducir">
-              <svg class="play-icon" id="playIcon" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6 4 20 12 6 20 6 4"></polygon>
-              </svg>
-              <svg class="pause-icon hidden" id="pauseIcon" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16"></rect>
-                <rect x="14" y="4" width="4" height="16"></rect>
-              </svg>
-            </button>
-
-            <!-- Next -->
-            <button class="control-btn" type="button" aria-label="Siguiente">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 4 15 12 5 20 5 4"></polygon>
-                <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line>
-              </svg>
-            </button>
-
-            <!-- Repeat -->
-            <button class="control-btn active" type="button" aria-label="Repetir">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="17 1 21 5 17 9"></polyline>
-                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                <polyline points="7 23 3 19 7 15"></polyline>
-                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Indicador "DALE PLAY" con mano animada -->
-          <div class="dale-play-tag" id="dalePlayAction">
-            <span>DALE PLAY</span>
-            <svg class="click-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M14 9V5a3 3 0 0 0-6 0v7a2 2 0 0 1-2 2H5a2 2 0 0 0-2 2v2a6 6 0 0 0 6 6h6a6 6 0 0 0 6-6v-6a2 2 0 0 0-2-2h-3a2 2 0 0 0-2-2z"/>
-              <path d="M10 9V7a2 2 0 0 1 4 0v2"/>
-            </svg>
+        <div class="signature-block">
+          <h1 class="girl-signature">Ernestina</h1>
+          <div class="event-tagline">
+            <span class="tag-divider"></span>
+            <span class="tag-text">MIS XV AÑOS</span>
+            <span class="tag-divider"></span>
           </div>
         </div>
 
-        <!-- Indicador de desplazamiento hacia abajo -->
-        <a href="#seccion-fiesta" class="scroll-down-hint">
-          <span>Ver invitación</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Reproductor de audio editorial -->
+        <div class="music-card-player" id="audioPlayerWidget">
+          <div class="song-meta">
+            <div class="song-info">
+              <span class="song-title">Viva La Vida</span>
+              <span class="song-artist">Coldplay</span>
+            </div>
+            <div class="music-bars" id="cardWaveBars">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="player-progress-wrapper" id="progressBarContainer">
+            <div class="player-progress-track">
+              <div class="player-progress-fill" id="progressBar"></div>
+              <div class="player-progress-knob" id="progressThumb"></div>
+            </div>
+            <div class="player-time-row">
+              <span id="currentTime">0:00</span>
+              <span id="totalDuration">4:02</span>
+            </div>
+          </div>
+
+          <div class="player-actions">
+            <!-- Botón de reproducción principal -->
+            <button class="action-play-btn" id="playBtn" type="button" aria-label="Reproducir música">
+              <svg class="icon-play" id="playIcon" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="7,4 20,12 7,20"/>
+              </svg>
+              <svg class="icon-pause hidden" id="pauseIcon" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16" rx="1"/>
+                <rect x="14" y="4" width="4" height="16" rx="1"/>
+              </svg>
+            </button>
+            <span class="play-hint-text" id="dalePlayAction">DALE PLAY</span>
+          </div>
+        </div>
+
+        <!-- Indicador de scroll editorial -->
+        <a href="#seccion-fiesta" class="scroll-discover-link" aria-label="Descubrir la invitación">
+          <span class="discover-text">DESCUBRIR</span>
+          <svg class="discover-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </a>
       </div>
     </section>
 
-    <!-- ==================== SECCIÓN 2: FIESTA & CUENTA REGRESIVA ==================== -->
-    <section class="card-section section-party" id="seccion-fiesta">
-      <div class="section-badge-icon">
-        <!-- Siluetas de festejo -->
-        <svg class="dancers-icon" viewBox="0 0 100 80" fill="currentColor">
-          <!-- Siluetas con manos alzadas bailando -->
-          <circle cx="22" cy="18" r="6" />
-          <path d="M16 28 L10 14 L12 13 L19 24 L22 36 L15 55 L9 74 L13 75 L18 57 L24 45 L30 57 L34 75 L38 74 L31 54 L27 34 L31 24 L38 13 L40 14 L34 28 Z"/>
-          <circle cx="50" cy="15" r="6.5" />
-          <path d="M42 27 L33 11 L36 10 L46 22 L49 35 L43 56 L38 75 L43 76 L47 57 L52 44 L56 57 L60 76 L65 75 L59 55 L54 34 L57 23 L67 11 L70 12 L61 27 Z"/>
-          <circle cx="78" cy="20" r="6" />
-          <path d="M72 30 L66 16 L68 15 L75 25 L78 37 L72 55 L67 74 L71 75 L76 57 L81 45 L86 57 L90 75 L94 74 L88 54 L84 34 L87 25 L94 15 L96 16 L90 30 Z"/>
+    <!-- ==========================================
+         SECCIÓN 2: LA FIESTA & CUENTA REGRESIVA
+         ========================================== -->
+    <section class="screen-section section-celebration" id="seccion-fiesta">
+      <!-- Emblema de gala elegante -->
+      <div class="celebration-emblem">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="20" cy="20" r="18" stroke-dasharray="1,3"/>
+          <circle cx="20" cy="20" r="14"/>
+          <path d="M20 7L21.5 18.5L33 20L21.5 21.5L20 33L18.5 21.5L7 20L18.5 18.5Z" fill="currentColor"/>
         </svg>
       </div>
 
-      <h2 class="section-title brush-title">¡Fiesta!</h2>
+      <div class="section-heading-group">
+        <span class="section-eyebrow">CELEBRACIÓN</span>
+        <h2 class="section-main-title cursive-highlight">¡Fiesta!</h2>
+      </div>
 
-      <!-- Fecha destacada -->
-      <div class="date-banner">
-        <div class="date-line"></div>
-        <div class="date-content">
-          <span class="day-name">SÁBADO</span>
-          <span class="day-number">17</span>
-          <span class="month-name">OCTUBRE</span>
+      <!-- Tarjeta de Fecha & Hora -->
+      <div class="date-hero-card">
+        <div class="date-header">
+          <span class="date-day-label">SÁBADO</span>
+          <span class="date-number">17</span>
+          <span class="date-month-label">OCTUBRE</span>
         </div>
-        <div class="date-line"></div>
+        <div class="date-time-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="time-clock-icon">
+            <circle cx="12" cy="12" r="9"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span>21:30 HS</span>
+        </div>
       </div>
 
-      <div class="time-callout">
-        <span class="clock-icon">🕒</span>
-        <span class="time-text">21:30 HS</span>
-      </div>
+      <!-- Ubicación / Salón -->
+      <div class="venue-card">
+        <div class="venue-info">
+          <span class="venue-subtitle">LUGAR DEL EVENTO</span>
+          <h3 class="venue-name">Salón Mirasoles</h3>
+          <p class="venue-address">Av. Paraguay 553</p>
+          <span class="venue-city">Resistencia, Chaco</span>
+        </div>
 
-      <!-- Lugar / Salón -->
-      <div class="location-card">
-        <span class="salon-label">SALÓN</span>
-        <h3 class="salon-name">Mirasoles</h3>
-        <p class="salon-address">Av. Paraguay 553</p>
-        <span class="salon-city">Resistencia, Chaco</span>
-
-        <!-- Botones de Acción: Mapa y Calendario -->
-        <div class="action-buttons-group">
+        <div class="venue-actions">
           <a href="https://www.google.com/maps/search/?api=1&query=Salon+Mirasoles+Av.+Paraguay+553+Resistencia+Chaco" 
              target="_blank" 
              rel="noopener noreferrer" 
-             class="glow-button btn-map">
+             class="btn-editorial btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
             </svg>
-            <span>IR AL MAPA</span>
-            <span class="click-pulse">👆</span>
+            <span>CÓMO LLEGAR</span>
           </a>
 
-          <button type="button" class="glow-button btn-calendar" id="btnAddToCalendar">
+          <button type="button" class="btn-editorial btn-secondary" id="btnAddToCalendar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
-            <span>AGENDAR EVENTO</span>
+            <span>AGENDAR FECHA</span>
           </button>
         </div>
       </div>
 
-      <!-- Cuenta regresiva en vivo -->
-      <div class="countdown-container">
-        <h4 class="countdown-heading">FALTA MUY POCO</h4>
-        <div class="countdown-grid" id="countdownGrid">
-          <div class="countdown-item">
-            <div class="countdown-number" id="cdDays">00</div>
-            <span class="countdown-label">DÍAS</span>
+      <!-- Cuenta regresiva de lujo -->
+      <div class="countdown-editorial-card">
+        <div class="countdown-title-row">
+          <span class="card-ornament-dot">✦</span>
+          <span class="countdown-title">FALTA MUY POCO</span>
+          <span class="card-ornament-dot">✦</span>
+        </div>
+
+        <div class="countdown-units-grid" id="countdownGrid">
+          <div class="countdown-unit">
+            <span class="unit-number" id="cdDays">00</span>
+            <span class="unit-name">DÍAS</span>
           </div>
-          <span class="countdown-colon">:</span>
-          <div class="countdown-item">
-            <div class="countdown-number" id="cdHours">00</div>
-            <span class="countdown-label">HORAS</span>
+          <span class="unit-separator">:</span>
+          <div class="countdown-unit">
+            <span class="unit-number" id="cdHours">00</span>
+            <span class="unit-name">HORAS</span>
           </div>
-          <span class="countdown-colon">:</span>
-          <div class="countdown-item">
-            <div class="countdown-number" id="cdMinutes">00</div>
-            <span class="countdown-label">MINUTOS</span>
+          <span class="unit-separator">:</span>
+          <div class="countdown-unit">
+            <span class="unit-number" id="cdMinutes">00</span>
+            <span class="unit-name">MIN</span>
           </div>
-          <span class="countdown-colon">:</span>
-          <div class="countdown-item">
-            <div class="countdown-number" id="cdSeconds">00</div>
-            <span class="countdown-label">SEGUNDOS</span>
+          <span class="unit-separator">:</span>
+          <div class="countdown-unit">
+            <span class="unit-number" id="cdSeconds">00</span>
+            <span class="unit-name">SEG</span>
           </div>
         </div>
       </div>
 
-      <a href="#top" class="back-to-start-btn">VOLVER AL INICIO</a>
+      <a href="#top" class="nav-return-btn">VOLVER AL INICIO</a>
     </section>
 
-    <!-- ==================== SECCIÓN 3: DRESS CODE & CONFIRMACIÓN ==================== -->
-    <section class="card-section section-dresscode" id="seccion-dresscode">
-      <!-- Ícono de vestimenta con destellos dorados -->
-      <div class="dresscode-icon-box">
-        <div class="sparkle sp-1">✦</div>
-        <div class="sparkle sp-2">✦</div>
-        <div class="sparkle sp-3">✦</div>
-        <div class="sparkle sp-4">✦</div>
-        <svg class="outfit-svg" viewBox="0 0 100 100" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Vestido -->
-          <path d="M30 32 L38 32 L40 42 L34 50 L20 80 L52 80 L38 50 L32 42 Z"/>
-          <path d="M26 32 C26 38 42 38 42 32"/>
-          <path d="M22 68 Q36 72 50 68"/>
-          <path d="M25 60 Q36 64 47 60"/>
-          <!-- Traje / Camisa con corbata -->
-          <path d="M52 25 L65 25 L75 32 L85 25 L92 36 L85 58 L77 58 L77 80 L56 80 L56 36 Z"/>
-          <path d="M65 25 L70 36 L75 25"/>
-          <line x1="70" y1="36" x2="70" y2="58" stroke-dasharray="2,3"/>
+    <!-- ==========================================
+         SECCIÓN 3: DRESS CODE & CONFIRMACIÓN
+         ========================================== -->
+    <section class="screen-section section-dress" id="seccion-dresscode">
+      <!-- Ícono de moda estilizado arquitectónico -->
+      <div class="style-icon-wrapper">
+        <svg class="couture-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Silueta moderna de vestido -->
+          <path d="M22 24 C22 28 34 28 34 24 L36 34 L30 42 L18 70 L46 70 L34 42 L28 34 Z"/>
+          <line x1="18" y1="70" x2="46" y2="70"/>
+          <path d="M21 58 Q32 62 43 58"/>
+          <!-- Silueta moderna de traje y corbata -->
+          <path d="M48 20 L58 20 L66 28 L74 20 L78 30 L72 48 L66 48 L66 70 L50 70 L50 30 Z"/>
+          <path d="M58 20 L62 30 L66 20"/>
+          <path d="M62 30 L64 45 L62 48 L60 45 Z"/>
         </svg>
       </div>
 
-      <h2 class="section-title">DRESS CODE</h2>
-      <h3 class="dress-style">VESTIR ELEGANTE SPORT</h3>
+      <div class="section-heading-group">
+        <span class="section-eyebrow">CÓDIGO DE VESTIMENTA</span>
+        <h2 class="section-main-title">DRESS CODE</h2>
+        <p class="dress-category">ELEGANTE SPORT</p>
+      </div>
 
-      <div class="dress-details">
-        <p class="dress-line">Vestido corto permitido. Corbata opcional.</p>
-        <div class="color-reserved-badge">
-          <span class="badge-dot"></span>
-          <span>Color reservado: <strong>Azul</strong></span>
-          <span class="badge-dot"></span>
+      <div class="dress-guidelines">
+        <p class="guideline-phrase">Vestido corto permitido · Corbata opcional</p>
+        <div class="reserved-color-pill">
+          <span class="color-sample-circle"></span>
+          <span class="color-text">Color reservado para la quinceañera: <strong>Azul</strong></span>
         </div>
       </div>
 
-      <!-- Tarjeta de Confirmación de presencia (WhatsApp) -->
-      <div class="rsvp-card">
-        <div class="rsvp-sparkles">✨</div>
-        <p class="rsvp-instruction">
-          Por favor, confirmá tu presencia<br>
-          enviando un WhatsApp<br>
-          <strong>antes del 9 de octubre</strong>
-        </p>
+      <!-- Tarjeta de Confirmación de Asistencia (RSVP) -->
+      <div class="rsvp-editorial-card">
+        <div class="rsvp-header">
+          <span class="rsvp-eyebrow">CONFIRMACIÓN DE ASISTENCIA</span>
+          <h3 class="rsvp-title">¿Nos acompañás?</h3>
+          <p class="rsvp-deadline">Por favor, confirmá tu presencia antes del <strong>9 de octubre</strong></p>
+        </div>
 
-        <!-- Botón de WhatsApp -->
         <a href="https://wa.me/5493624249632?text=%C2%A1Hola%20Ernestina!%20%E2%9C%A8%20Quiero%20confirmar%20mi%20asistencia%20a%20tu%20fiesta%20de%2015%20a%C3%B1os.%20Mi%20nombre%20es:%20" 
            target="_blank" 
            rel="noopener noreferrer" 
-           class="whatsapp-pill-btn">
-          <div class="wa-icon-circle">
+           class="btn-whatsapp-rsvp">
+          <div class="wa-symbol">
             <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347m-4.667 3.321c-.443.208-.755.208-1.037-.124-.282-.332-1.127-1.39-1.536-1.908-.41-.518-.328-.58-.093-.829.234-.249.522-.596.755-.89.233-.294.155-.544.078-.792-.078-.249-.7-1.688-.959-2.312-.252-.607-.508-.525-.7-.535l-.596-.012c-.207 0-.544.078-.829.389-.285.311-1.089 1.064-1.089 2.595 0 1.531 1.115 3.01 1.27 3.218.156.208 2.193 3.35 5.313 4.697 2.155.931 2.998.927 4.072.768.729-.108 2.259-.924 2.578-1.817.319-.893.319-1.659.224-1.818z"/>
+              <path d="M12.031 2C6.495 2 2 6.495 2 12.031c0 1.954.56 3.864 1.621 5.51L2 22l4.61-1.579a9.972 9.972 0 005.421 1.579h.005c5.535 0 10.03-4.495 10.03-10.031C22.066 6.495 17.571 2 12.031 2zm5.86 14.175c-.244.685-1.42 1.306-1.957 1.385-.515.077-1.185.11-3.418-.813-2.856-1.181-4.706-4.086-4.848-4.275-.143-.19-1.157-1.538-1.157-2.934 0-1.395.733-2.083.994-2.368.261-.285.57-.356.76-.356.19 0 .38.002.546.01.176.008.411-.067.643.489.237.57.808 1.972.879 2.115.071.142.119.309.024.499-.095.19-.143.308-.285.474-.143.167-.3.372-.429.5-.142.143-.29.298-.124.583.166.285.739 1.218 1.587 1.973 1.091.97 2.012 1.272 2.297 1.414.285.143.451.119.618-.071.166-.19.713-.831.903-1.116.19-.285.38-.238.641-.143.262.095 1.664.784 1.95 1.021.285.237.475.356.546.475.072.119.072.689-.172 1.374z"/>
             </svg>
           </div>
-          <span class="wa-number">362 424 9632</span>
-          <span class="click-hand-mini">👆</span>
+          <div class="wa-text-col">
+            <span class="wa-action">CONFIRMAR VÍA WHATSAPP</span>
+            <span class="wa-phone">362 424 9632</span>
+          </div>
         </a>
       </div>
 
-      <a href="#top" class="back-to-start-btn">VOLVER AL INICIO</a>
+      <a href="#top" class="nav-return-btn">VOLVER AL INICIO</a>
     </section>
 
-    <!-- ==================== SECCIÓN 4: REGALOS & ALIAS ==================== -->
-    <section class="card-section section-gift" id="seccion-regalos">
-      <!-- Ícono de Regalo -->
-      <div class="gift-icon-box">
-        <svg class="gift-svg" viewBox="0 0 24 24" fill="none" stroke="#ffd875" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 12 20 22 4 22 4 12"></polyline>
-          <rect x="2" y="7" width="20" height="5"></line>
-          <line x1="12" y1="22" x2="12" y2="7"></line>
-          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+    <!-- ==========================================
+         SECCIÓN 4: REGALOS & ALIAS
+         ========================================== -->
+    <section class="screen-section section-gifts" id="seccion-regalos">
+      <!-- Emblema de regalo refinado -->
+      <div class="gift-emblem">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="40 24 40 42 8 42 8 24"/>
+          <rect x="4" y="14" width="40" height="10" rx="1"/>
+          <line x1="24" y1="42" x2="24" y2="14"/>
+          <path d="M24 14C24 14 20 6 15 6C11 6 10 9 10 11C10 15 24 14 24 14Z"/>
+          <path d="M24 14C24 14 28 6 33 6C37 6 38 9 38 11C38 15 24 14 24 14Z"/>
         </svg>
       </div>
 
-      <h2 class="gift-headline">
-        LO MÁS IMPORTANTE PARA MÍ,<br>
-        ES QUE COMPARTAS<br>
-        ESTA NOCHE CONMIGO
-      </h2>
+      <div class="gift-text-container">
+        <h2 class="gift-statement">
+          LO MÁS IMPORTANTE PARA MÍ,<br>
+          ES QUE COMPARTAS<br>
+          ESTA NOCHE CONMIGO
+        </h2>
+        <p class="gift-gentle-sub">
+          Si deseás hacerme un presente,<br>
+          podés colaborar con mis sueños a través de mi alias:
+        </p>
+      </div>
 
-      <p class="gift-subtext">
-        ...pero si estás pensando<br>
-        en hacerme un regalito,<br>
-        te dejo mi alias:
-      </p>
-
-      <!-- Tarjeta interactiva de Alias -->
-      <div class="alias-card">
-        <div class="phone-transfer-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#ffd875" stroke-width="1.8">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="12" y1="18" x2="12.01" y2="18"></line>
-            <path d="M2 10l3 3-3 3" />
-            <path d="M22 10l-3 3 3 3" />
-          </svg>
+      <!-- Tarjeta bancaria minimalista -->
+      <div class="bank-alias-card">
+        <div class="bank-card-top">
+          <div class="bank-chip">
+            <span class="chip-line"></span>
+            <span class="chip-line"></span>
+          </div>
+          <span class="bank-type-label">TRANSFERENCIA / CVU</span>
         </div>
 
-        <div class="alias-info">
-          <span class="alias-label">ALIAS BANCARIO / CVU</span>
-          <span class="alias-code" id="aliasCodeText">EVALUSSIR1621.NX.ARS</span>
+        <div class="alias-display-box">
+          <span class="alias-tag">ALIAS</span>
+          <span class="alias-string" id="aliasCodeText">EVALUSSIR1621.NX.ARS</span>
         </div>
 
-        <button type="button" class="copy-alias-btn" id="btnCopyAlias" aria-label="Copiar Alias">
-          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        <button type="button" class="btn-copy-action" id="btnCopyAlias" aria-label="Copiar alias bancario">
+          <svg class="copy-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
           </svg>
           <span id="copyBtnLabel">COPIAR ALIAS</span>
         </button>
       </div>
 
-      <a href="#top" class="back-to-start-btn">VOLVER AL INICIO</a>
+      <a href="#top" class="nav-return-btn">VOLVER AL INICIO</a>
     </section>
 
-    <!-- ==================== SECCIÓN 5: CIERRE ==================== -->
-    <section class="card-section section-closing" id="seccion-cierre">
-      <div class="closing-glow-circle"></div>
-
-      <div class="closing-content">
-        <p class="closing-phrase">te espero</p>
-        <h2 class="closing-name">Ernestina</h2>
+    <!-- ==========================================
+         SECCIÓN 5: CIERRE
+         ========================================== -->
+    <section class="screen-section section-farewell" id="seccion-cierre">
+      <div class="farewell-constellation">
+        <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.2">
+          <line x1="30" y1="4" x2="30" y2="56" stroke-dasharray="2,3"/>
+          <line x1="4" y1="30" x2="56" y2="30" stroke-dasharray="2,3"/>
+          <circle cx="30" cy="30" r="16"/>
+          <circle cx="30" cy="30" r="3" fill="currentColor"/>
+        </svg>
       </div>
 
-      <a href="#top" class="back-to-start-btn">VOLVER AL INICIO</a>
+      <div class="farewell-content">
+        <p class="farewell-words">te espero</p>
+        <h2 class="farewell-signature">Ernestina</h2>
+      </div>
+
+      <div class="farewell-footer">
+        <a href="#top" class="nav-return-btn">VOLVER AL INICIO</a>
+      </div>
     </section>
 
   </main>
 
-  <!-- Notificación Toast cuando se copia el alias -->
-  <div class="toast-notification" id="toastNotification">
-    <span class="toast-icon">✨</span>
-    <span class="toast-message" id="toastMessage">¡Alias copiado al portapapeles!</span>
+  <!-- Notificación Toast elegante de copiado -->
+  <div class="toast-feedback" id="toastNotification" role="alert" aria-live="polite">
+    <div class="toast-glow"></div>
+    <span class="toast-check">✓</span>
+    <span class="toast-msg" id="toastMessage">Alias copiado al portapapeles</span>
   </div>
 
   <script src="assets/script.js"></script>
